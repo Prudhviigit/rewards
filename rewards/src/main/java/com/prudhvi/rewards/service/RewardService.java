@@ -7,10 +7,7 @@ import com.prudhvi.rewards.repository.RewardsRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Month;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,7 +30,7 @@ public class RewardService {
             return Optional.empty();
         }
 
-        Map<Month, Integer> monthlyPoints = new HashMap<>();
+        Map<Month, Integer> monthlyPoints = new TreeMap<>();
         int totalPoints = 0;
 
         for (CustomerTransaction t : transactions) {
@@ -49,9 +46,9 @@ public class RewardService {
         List<MonthlyReward> monthlyRewards = monthlyPoints.entrySet()
                 .stream()
                 .map(entry -> new MonthlyReward(
-                        entry.getKey().toString(),
+                        entry.getKey().name(),
                         entry.getValue()))
-                .collect(Collectors.toList());
+                .toList();
 
         return Optional.of(new RewardResponse(customerId, monthlyRewards, totalPoints));
     }
