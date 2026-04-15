@@ -26,7 +26,7 @@ The application uses **in-memory transaction data** to keep the project simple a
 src
 └── main
     └── java
-        └── com.example.rewards
+        └── com.prudhvi.rewards
             ├── controller
             ├── dto
             ├── model
